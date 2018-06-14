@@ -1,0 +1,78 @@
+﻿<Controls:MetroWindow x:Class="Firm_Control.NewTask"
+    xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
+    GlowBrush="{DynamicResource AccentColorBrush}"
+    Title="Nowe zadanie" Height="400" Width="250" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Controls:MetroWindow.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Emerald.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Controls:MetroWindow.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="35"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel HorizontalAlignment="Center" Grid.Row="0">
+            <Label Content="* name_tb: "/>
+            <TextBox Name="name_tb" Margin="5" Width="220"/>
+        </StackPanel>
+
+        <StackPanel HorizontalAlignment="Center" Grid.Row="1">
+            <Label Content="Klient: "/>
+            <ComboBox Name="customer_cb" Margin="5" Width="220">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding firstNameAndLastName}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </StackPanel>
+
+        <StackPanel HorizontalAlignment="Center" Grid.Row="2">
+            <Label Content="* Pracownik odpowidzialny za zadanie: "/>
+            <ComboBox Name="employeeResponsible_cb" Margin="5" Width="220">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding login}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </StackPanel>
+
+        <StackPanel HorizontalAlignment="Center" Grid.Row="3">
+            <Label Content="* Data ukończenia zadania: "/>
+            <DatePicker Name="completionTime" HorizontalAlignment="Center" Margin="5" Width="220"/>
+        </StackPanel>
+
+        <StackPanel HorizontalAlignment="Center" Grid.Row="4">
+            <Label Content="Priorytet zadania: "/>
+            <ComboBox Name="priority_cb" Margin="5" Width="220">
+                <ComboBoxItem IsSelected="True">Niski</ComboBoxItem>
+                <ComboBoxItem>Średni</ComboBoxItem>
+                <ComboBoxItem>Wysoki</ComboBoxItem>
+            </ComboBox>
+        </StackPanel>
+
+        <Button Background="Khaki" Name="btnNewTask" Margin="5" Grid.Row="5" Click="NewTask_Click" IsDefault="True"/>
+    </Grid>
+
+</Controls:MetroWindow>

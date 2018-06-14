@@ -1,0 +1,191 @@
+﻿<Controls:MetroWindow
+    xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="Firm_Control.MainWindow"
+    GlowBrush="{DynamicResource AccentColorBrush}"
+    Title="Firm Control 0.01" WindowState="Maximized" WindowStartupLocation="CenterScreen" x:Name="wnd" d:DesignWidth="1141">
+    <Controls:MetroWindow.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Emerald.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Controls:MetroWindow.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="36"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <DockPanel HorizontalAlignment="Left" Margin="5" Grid.Row="0" Grid.Column="0">
+            <Label Content="Zalogowany jako:"/>
+            <Label x:Name="logged_l"/>
+        </DockPanel>
+        <DockPanel HorizontalAlignment="Center" Margin="5" Grid.Row="0" Grid.Column="1">
+            <Label Content="Nowe wiadomości:" Target="{Binding ElementName=txtMail}"/>
+            <Label x:Name="nemail_tbs_l" Content="0"/>
+        </DockPanel>
+        <DockPanel HorizontalAlignment="Right" Margin="5" Grid.Row="0" Grid.Column="2">
+            <TextBlock Text="{Binding ConverterCulture=pl-PL, Source={x:Static system:DateTime.Now}, StringFormat=dddd | d MMMM yyyy}"/>
+        </DockPanel>
+
+        <TabControl HorizontalAlignment="Stretch" Grid.Row="1" Grid.ColumnSpan="3">
+            <TabControl.Resources>
+                <Style TargetType="{x:Type TabPanel}">
+                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                </Style>
+            </TabControl.Resources>
+
+            <TabItem Header="Realizacja">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <DockPanel HorizontalAlignment="Left" Margin="5" Grid.Row="0">
+                        <Button Background="Khaki" Content="Nowe zadanie" Click="NewTask_Click"/>
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Left" Margin="5" Grid.Row="0" Grid.Column="1">
+                        <Button Background="Khaki" x:Name="done_btn" Content="Wykonane" Click="DoneTask_Click"/>
+                        <Button Background="Khaki" Content="Edytuj" Click="Edit_Click"/>
+                        <Button Background="Khaki" Content="Usuń" Click="Delete_Click"/>
+
+                    </DockPanel>
+
+                    <ListView x:Name="tasks_lv" Grid.Row="1" Grid.ColumnSpan="2" SelectionChanged="tasks_lv_SelectionChanged">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Zadanie" Width="300" DisplayMemberBinding="{Binding name}"/>
+                                <GridViewColumn Header="Klient" Width="150" DisplayMemberBinding="{Binding customer}"/>
+                                <GridViewColumn Header="Osoba odpowiedzialna" Width="170" DisplayMemberBinding="{Binding employeeResponsible}"/>
+                                <GridViewColumn Header="Wykonane" Width="150" DisplayMemberBinding="{Binding howMuchDone}"/>
+                                <GridViewColumn Header="Ile dni" Width="100" DisplayMemberBinding="{Binding howMuchTime}"/>
+                                <GridViewColumn Header="Data ukończenia" Width="150" DisplayMemberBinding="{Binding completionTime, ConverterCulture=pl-PL, StringFormat=dd MMMM yyyy}"/>
+                                <GridViewColumn Header="Priorytet" Width="70" DisplayMemberBinding="{Binding priority}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Klienci">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <DockPanel HorizontalAlignment="Left" Margin="5" Grid.Row="0">
+                        <Button Background="Khaki" Content="Nowy klient" Click="NewCustomer_Click"/>
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Left" Margin="5" Grid.Row="0" Grid.Column="1">
+                        <Button Background="Khaki" Content="Edytuj" Click="EditCustomer_Click"/>
+                        <Button Background="Khaki" Content="Usuń" Click="DeleteCustomer_Click"/>
+                    </DockPanel>
+
+                    <ListView x:Name="customers_lv" Grid.Row="1" Grid.ColumnSpan="2">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Imie" Width="200" DisplayMemberBinding="{Binding firstName}"/>
+                                <GridViewColumn Header="Nazwisko" Width="200" DisplayMemberBinding="{Binding lastName}"/>
+                                <GridViewColumn Header="Mail" Width="200" DisplayMemberBinding="{Binding email}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Pracownicy">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <DockPanel HorizontalAlignment="Left" Margin="5" Grid.Row="0">
+                        <Button Background="Khaki" Content="Nowy pracownik" Click="NewEmployee_Click"/>
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Left" Margin="5" Grid.Row="0" Grid.Column="1">
+                        <Button Background="Khaki" Content="Edytuj" Click="EditEmployee_Click"/>
+                        <Button Background="Khaki" Content="Usuń" Click="DeleteEmployee_Click"/>
+                    </DockPanel>
+
+                    <ListView x:Name="employees_lv" Grid.Row="1" Grid.ColumnSpan="2">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Login" Width="150" DisplayMemberBinding="{Binding login}"/>
+                                <GridViewColumn Header="Imie" Width="200" DisplayMemberBinding="{Binding firstName}"/>
+                                <GridViewColumn Header="Nazwisko" Width="200" DisplayMemberBinding="{Binding lastName}"/>
+                                <GridViewColumn Header="Stanowisko" Width="150" DisplayMemberBinding="{Binding position}"/>
+                                <GridViewColumn Header="E-Mail" Width="150" DisplayMemberBinding="{Binding email}"/>
+                                <GridViewColumn Header="Telefon" Width="150" DisplayMemberBinding="{Binding phone}"/>
+                                <GridViewColumn Header="Pensja" Width="120" DisplayMemberBinding="{Binding salary}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Wiadomości">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <DockPanel HorizontalAlignment="Left" Margin="5" Grid.Row="0">
+                        <Button Background="Khaki" Content="Napisz nową" Click="Nemail_tb_Click"/>
+                    </DockPanel>
+
+                    <ListView x:Name="messages_lv" Grid.Row="1" Grid.ColumnSpan="2">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Od kogo" Width="150" DisplayMemberBinding="{Binding to}"/>
+                                <GridViewColumn Header="Do kogo" Width="200" DisplayMemberBinding="{Binding from}"/>
+                                <GridViewColumn Header="Temat" Width="200" DisplayMemberBinding="{Binding subject}"/>
+                                <GridViewColumn Header="Treść" Width="850" DisplayMemberBinding="{Binding content}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <DockPanel HorizontalAlignment="Left" Margin="5" Grid.Row="0" Grid.Column="1">
+                        <Button Background="Khaki" Content="Odczytaj" Click="OpenMail_Click"/>
+                        <Button Background="Khaki" Content="Odpowiedz" Click="ReplyMail_Click"/>
+                        <Button Background="Khaki" Content="Usuń" Click="DeleteMail_Click"/>
+                        <CheckBox Name="received_cb" Margin="20,0,0,0" IsChecked="True" Unchecked="received_Unchecked" Checked="received_Checked">Odebrane</CheckBox>
+                        <CheckBox Name="sent_cb" Margin="10,0,0,0" Unchecked="sent_Unchecked" Checked="sent_Checked">Wysłane</CheckBox>
+                    </DockPanel>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Ustawienia">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+        </TabControl>
+    </Grid>
+
+</Controls:MetroWindow>

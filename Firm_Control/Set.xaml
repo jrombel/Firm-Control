@@ -1,0 +1,39 @@
+﻿<Controls:MetroWindow x:Class="Firm_Control.Set"
+    xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
+    GlowBrush="{DynamicResource AccentColorBrush}"
+    Title="Witaj w programie Firm Control!" Height="250" Width="350" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Controls:MetroWindow.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Emerald.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Controls:MetroWindow.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.7*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel HorizontalAlignment="Center" Margin="5" Grid.Row="0">
+            <Label Content="Wprowadzasz nową firmę do programu Firm Control?"/>
+            <Label Content="Nazwa firmy: "/>
+            <TextBox Name="name_tb" Margin="5"/>
+            <Button Background="Khaki" Click="SaveFile_Click" Margin="5" Width="300">Miejsce w którym ma zostać utworzona jej baza!</Button>
+        </StackPanel>
+
+        <StackPanel HorizontalAlignment="Center" Grid.Row="1" Margin="5">
+            <Label Content="Baza firmy już istnieje w Programie Firm Control?"/>
+            <Button Background="Khaki" Click="OpenFile_Click" Margin="5" Width="300">Miejsce w którym znajduje się jej baza!</Button>
+        </StackPanel>
+    </Grid>
+
+</Controls:MetroWindow>
